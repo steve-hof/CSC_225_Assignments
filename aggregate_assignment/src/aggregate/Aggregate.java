@@ -12,9 +12,58 @@ package aggregate;
 
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class Aggregate {
 
+    // The first line of this method was taken from Stack Overflow https://stackoverflow.com/questions/14206768/how-to-check-if-a-string-is-numeric
+    public boolean isNumeric(String s) {
+        return s != null && s.matches("[-+]?\\d*\\.?\\d+");
+    }
+
+    public static void writeToCsv(ArrayList<String[]> csv_Data, String header, String fileName){
+        FileWriter fileWriter = null;
+
+        try {
+            fileWriter = new FileWriter(fileName);
+
+            //Write the CSV file header
+            fileWriter.append(header);
+
+//            //Add a new line separator after the header
+//            fileWriter.append(NEW_LINE_SEPARATOR);
+
+            //Write a new student object list to the CSV file
+//            for (Student student : students) {
+//                fileWriter.append(String.valueOf(student.getId()));
+//                fileWriter.append(COMMA_DELIMITER);
+//                fileWriter.append(student.getFirstName());
+//                fileWriter.append(COMMA_DELIMITER);
+//                fileWriter.append(student.getLastName());
+//                fileWriter.append(COMMA_DELIMITER);
+//                fileWriter.append(student.getGender());
+//                fileWriter.append(COMMA_DELIMITER);
+//                fileWriter.append(String.valueOf(student.getAge()));
+//                fileWriter.append(NEW_LINE_SEPARATOR);
+//        }
+
+            System.out.println("CSV file was created successfully !!!");
+
+        } catch (Exception e) {
+            System.out.println("Error in CsvFileWriter !!!");
+            e.printStackTrace();
+        } finally {
+
+            try {
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e) {
+                System.out.println("Error while flushing/closing fileWriter !!!");
+                e.printStackTrace();
+            }
+
+        }
+    }
 
     public static void showUsage() {
         System.err.printf("Usage: java Aggregate <function> <aggregation column> <csv file> <group column 1> <group column 2> ...\n");
@@ -52,7 +101,9 @@ public class Aggregate {
             return;
         }
 
+        // get header info
         String header_line;
+
         try {
             header_line = br.readLine(); //The readLine method returns either the next line of the file or null (if the end of the file has been reached)
         } catch (IOException e) {
@@ -63,6 +114,29 @@ public class Aggregate {
             System.err.printf("Error: CSV file %s has no header row\n", csv_filename);
             return;
         }
+
+        // get data info
+        String row_line;
+//        ArrayList<String> csv_data = new ArrayList<String>();
+        ArrayList<String[]> csvData = new ArrayList<String[]>();
+
+        try {
+            while((row_line = br.readLine())!=null) {
+                //The readLine method returns either the next
+                System.out.println(row_line);
+                String[] row_array = row_line.split(",");
+                csvData.add(row_array);
+                int fill = 12;
+//                return;
+            }
+        } catch (IOException e) {
+            System.err.printf("Error reading file\n", csv_filename);
+            return;
+        }
+//        if (row_line == null) {
+//            System.err.printf("The file doesn't seem to have any data there fella", csv_filename);
+//            return;
+//        }
 
         //Split the header_line string into an array of string values using a comma
         //as the separator.
@@ -84,6 +158,7 @@ public class Aggregate {
 
 
         //... Your code here ...
+        writeToCsv(csvData, header_line, "csv_file.csv");
         int fill = 12;
     }
 
