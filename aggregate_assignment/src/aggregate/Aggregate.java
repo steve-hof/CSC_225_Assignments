@@ -20,7 +20,7 @@ public class Aggregate {
     public boolean isNumeric(String s) {
         return s != null && s.matches("[-+]?\\d*\\.?\\d+");
     }
-
+    // based on code found at https://examples.javacodegeeks.com/core-java/writeread-csv-files-in-java-example/
     public static void writeToCsv(ArrayList<String[]> csv_Data, String header, String fileName){
         FileWriter fileWriter = null;
 
@@ -31,8 +31,28 @@ public class Aggregate {
             fileWriter.append(header);
 
 //            //Add a new line separator after the header
-//            fileWriter.append(NEW_LINE_SEPARATOR);
+            fileWriter.append("\n");
 
+            int size = csv_Data.size();
+            for (String[] cell : csv_Data) {
+                for (int i = 0; i < cell.length; i++){
+                    System.out.println("this should be data:" + cell[i].toString() + "and I hope it is");
+                    fileWriter.append(cell[i].toString());
+                    fileWriter.append(",");
+                }
+                fileWriter.append("\n");
+            }
+
+//            for(int i=0;i<csv_Data.size();i++){
+//
+//                String[] row = new String[4];
+//                myString=outerArr.get(i);
+//                for(int j=0;j<myString.length;j++){
+//                    System.out.print(myString[j]);
+//                }
+//                System.out.print("\n");
+//
+//            }
             //Write a new student object list to the CSV file
 //            for (Student student : students) {
 //                fileWriter.append(String.valueOf(student.getId()));
@@ -117,7 +137,6 @@ public class Aggregate {
 
         // get data info
         String row_line;
-//        ArrayList<String> csv_data = new ArrayList<String>();
         ArrayList<String[]> csvData = new ArrayList<String[]>();
 
         try {
