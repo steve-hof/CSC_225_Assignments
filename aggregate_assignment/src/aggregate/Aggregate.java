@@ -22,8 +22,9 @@ public class Aggregate {
     public boolean isNumeric(String s) {
         return s != null && s.matches("[-+]?\\d*\\.?\\d+");
     }
+
     // based on code found at https://examples.javacodegeeks.com/core-java/writeread-csv-files-in-java-example/
-    public static void writeToCsv(String[][] array, String[] header, String fileName){
+    public static void writeToCsv(String[][] array, String[] header, String fileName) {
         FileWriter fileWriter = null;
 
         try {
@@ -40,7 +41,7 @@ public class Aggregate {
             fileWriter.append("\n");
 
             for (String[] row : array) {
-                for (int i = 0; i < row.length; i++){
+                for (int i = 0; i < row.length; i++) {
                     fileWriter.append(row[i].toString());
                     fileWriter.append(",");
                 }
@@ -71,19 +72,9 @@ public class Aggregate {
     }
 
     public static String[][] selectColumns(String[][] array, String[] col_names, String[] keep_cols) {
-//        boolean have_match;
-//        int num_rows = csv_Data.size();
-//        String[] test = csv_Data.get(1);
-//        String hello = "hello";
-//
-//        String item = csv_Data.get(0)[0];
-//
-//        String[] bla = col_names;
 
         int num_rows = array.length;
         int num_cols = keep_cols.length;
-        int count = 0;
-        int index = 0;
         String[][] pruned_array = new String[num_rows][num_cols];
 
         for (int i = 0; i < keep_cols.length; i++) {
@@ -151,7 +142,7 @@ public class Aggregate {
         ArrayList<String[]> csvData = new ArrayList<String[]>();
 
         try {
-            while((row_line = br.readLine())!=null) {
+            while ((row_line = br.readLine()) != null) {
                 //The readLine method returns either the next
                 System.out.println(row_line);
                 String[] row_array = row_line.split(",");
@@ -185,10 +176,15 @@ public class Aggregate {
 
 
         //... Your code here ...
-        // Convert to 2D array
 
-        String[][] trimmed_array = selectColumns(full_data_array, column_names, group_columns);
-        writeToCsv(trimmed_array, group_columns, "csv_file.csv");
+        String[] cols_needed = new String[group_columns.length + 1];
+        cols_needed[0] = agg_column;
+        for (int i = 1; i < cols_needed.length; i++) {
+            cols_needed[i] = group_columns[i-1];
+        }
+
+        String[][] trimmed_array = selectColumns(full_data_array, column_names, cols_needed);
+        writeToCsv(trimmed_array, cols_needed, "csv_file.csv");
 
         int fill = 12;
     }
