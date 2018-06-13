@@ -12,7 +12,9 @@ package aggregate;
 
 
 import java.io.*;
+import java.util.*; //ArrayList;
 import java.util.ArrayList;
+
 
 public class Aggregate {
 
@@ -21,52 +23,30 @@ public class Aggregate {
         return s != null && s.matches("[-+]?\\d*\\.?\\d+");
     }
     // based on code found at https://examples.javacodegeeks.com/core-java/writeread-csv-files-in-java-example/
-    public static void writeToCsv(ArrayList<String[]> csv_Data, String header, String fileName){
+    public static void writeToCsv(String[][] array, String[] header, String fileName){
         FileWriter fileWriter = null;
 
         try {
             fileWriter = new FileWriter(fileName);
 
             //Write the CSV file header
-            fileWriter.append(header);
+            for (int i = 0; i < header.length; i++) {
+                fileWriter.append(header[i]);
+                fileWriter.append(",");
+            }
+//            fileWriter.append(header);
 
-//            //Add a new line separator after the header
+            //Add a new line separator after the header
             fileWriter.append("\n");
 
-            int size = csv_Data.size();
-            for (String[] cell : csv_Data) {
-                for (int i = 0; i < cell.length; i++){
-                    System.out.println("this should be data:" + cell[i].toString() + "and I hope it is");
-                    fileWriter.append(cell[i].toString());
+            for (String[] row : array) {
+                for (int i = 0; i < row.length; i++){
+                    fileWriter.append(row[i].toString());
                     fileWriter.append(",");
                 }
                 fileWriter.append("\n");
+
             }
-
-//            for(int i=0;i<csv_Data.size();i++){
-//
-//                String[] row = new String[4];
-//                myString=outerArr.get(i);
-//                for(int j=0;j<myString.length;j++){
-//                    System.out.print(myString[j]);
-//                }
-//                System.out.print("\n");
-//
-//            }
-            //Write a new student object list to the CSV file
-//            for (Student student : students) {
-//                fileWriter.append(String.valueOf(student.getId()));
-//                fileWriter.append(COMMA_DELIMITER);
-//                fileWriter.append(student.getFirstName());
-//                fileWriter.append(COMMA_DELIMITER);
-//                fileWriter.append(student.getLastName());
-//                fileWriter.append(COMMA_DELIMITER);
-//                fileWriter.append(student.getGender());
-//                fileWriter.append(COMMA_DELIMITER);
-//                fileWriter.append(String.valueOf(student.getAge()));
-//                fileWriter.append(NEW_LINE_SEPARATOR);
-//        }
-
             System.out.println("CSV file was created successfully !!!");
 
         } catch (Exception e) {
@@ -90,6 +70,35 @@ public class Aggregate {
         System.err.printf("Where <function> is one of \"count\", \"count_distinct\", \"sum\", \"avg\"\n");
     }
 
+    public static String[][] selectColumns(String[][] array, String[] col_names, String[] keep_cols) {
+//        boolean have_match;
+//        int num_rows = csv_Data.size();
+//        String[] test = csv_Data.get(1);
+//        String hello = "hello";
+//
+//        String item = csv_Data.get(0)[0];
+//
+//        String[] bla = col_names;
+
+        int num_rows = array.length;
+        int num_cols = keep_cols.length;
+        int count = 0;
+        int index = 0;
+        String[][] pruned_array = new String[num_rows][num_cols];
+
+        for (int i = 0; i < keep_cols.length; i++) {
+            for (int j = 0; j < col_names.length; j++) {
+                if (keep_cols[i].equals(col_names[j])) {
+                    for (int k = 0; k < num_rows; k++) {
+                        pruned_array[k][i] = array[k][j].toString();
+                    }
+                }
+            }
+        }
+
+        int fill = 12;
+        return pruned_array;
+    }
 
     public static void main(String[] args) {
 
@@ -135,7 +144,9 @@ public class Aggregate {
             return;
         }
 
-        // get data info
+        //Split the header_line string into an array of string values using a comma as the separator.
+        String[] column_names = header_line.split(",");
+
         String row_line;
         ArrayList<String[]> csvData = new ArrayList<String[]>();
 
@@ -145,8 +156,6 @@ public class Aggregate {
                 System.out.println(row_line);
                 String[] row_array = row_line.split(",");
                 csvData.add(row_array);
-                int fill = 12;
-//                return;
             }
         } catch (IOException e) {
             System.err.printf("Error reading file\n", csv_filename);
@@ -157,9 +166,8 @@ public class Aggregate {
 //            return;
 //        }
 
-        //Split the header_line string into an array of string values using a comma
-        //as the separator.
-        String[] column_names = header_line.split(",");
+        String[][] full_data_array = new String[csvData.size()][column_names.length];
+        csvData.toArray(full_data_array);
 
         //As a diagnostic, print out all of the argument data and the column names from the CSV file
         //(for testing only: delete this from your final version)
@@ -177,7 +185,11 @@ public class Aggregate {
 
 
         //... Your code here ...
-        writeToCsv(csvData, header_line, "csv_file.csv");
+        // Convert to 2D array
+
+        String[][] trimmed_array = selectColumns(full_data_array, column_names, group_columns);
+        writeToCsv(trimmed_array, group_columns, "csv_file.csv");
+
         int fill = 12;
     }
 
