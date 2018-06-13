@@ -23,7 +23,29 @@ public class Aggregate {
         return s != null && s.matches("[-+]?\\d*\\.?\\d+");
     }
 
-    // based on code found at https://examples.javacodegeeks.com/core-java/writeread-csv-files-in-java-example/
+    public static float convertNumeric(String element) {
+        float float_element = Float.valueOf(element);
+        return float_element;
+
+    }
+
+    public static void writeToConsole(String[][] array, String[] header, String fileName) {
+        for (int i = 0; i < header.length; i++) {
+            System.out.printf(header[i]);
+            System.out.printf(",");
+        }
+
+        System.out.printf("\n");
+
+        for (String[] row : array) {
+            for (int i = 0; i < row.length; i++) {
+                System.out.printf(row[i].toString());
+                System.out.printf(",");
+            }
+            System.out.printf("\n");
+        }
+    }
+
     public static void writeToCsv(String[][] array, String[] header, String fileName) {
         FileWriter fileWriter = null;
 
@@ -35,7 +57,6 @@ public class Aggregate {
                 fileWriter.append(header[i]);
                 fileWriter.append(",");
             }
-//            fileWriter.append(header);
 
             //Add a new line separator after the header
             fileWriter.append("\n");
@@ -48,7 +69,6 @@ public class Aggregate {
                 fileWriter.append("\n");
 
             }
-            System.out.println("CSV file was created successfully !!!");
 
         } catch (Exception e) {
             System.out.println("Error in CsvFileWriter !!!");
@@ -65,6 +85,8 @@ public class Aggregate {
 
         }
     }
+
+
 
     public static void showUsage() {
         System.err.printf("Usage: java Aggregate <function> <aggregation column> <csv file> <group column 1> <group column 2> ...\n");
@@ -87,7 +109,6 @@ public class Aggregate {
             }
         }
 
-        int fill = 12;
         return pruned_array;
     }
 
@@ -144,7 +165,6 @@ public class Aggregate {
         try {
             while ((row_line = br.readLine()) != null) {
                 //The readLine method returns either the next
-                System.out.println(row_line);
                 String[] row_array = row_line.split(",");
                 csvData.add(row_array);
             }
@@ -156,35 +176,24 @@ public class Aggregate {
 //            System.err.printf("The file doesn't seem to have any data there fella", csv_filename);
 //            return;
 //        }
-
+        // Turn ArrayList into 2D array
         String[][] full_data_array = new String[csvData.size()][column_names.length];
         csvData.toArray(full_data_array);
 
-        //As a diagnostic, print out all of the argument data and the column names from the CSV file
-        //(for testing only: delete this from your final version)
-
-        System.out.println("Aggregation function: " + agg_function);
-        System.out.println("Aggregation column: " + agg_column);
-
-
-        for (String s : group_columns)
-            System.out.println("Grouping column: " + s);
-        System.out.println();
-
-        for (String s : column_names)
-            System.out.println("CSV column name: " + s);
-
-
-        //... Your code here ...
+        /* create array of columns in proper order based on command line args
+        * the column being aggregated is turned into floats and added at the end*/
 
         String[] cols_needed = new String[group_columns.length + 1];
-        cols_needed[0] = agg_column;
-        for (int i = 1; i < cols_needed.length; i++) {
-            cols_needed[i] = group_columns[i-1];
+
+        for (int i = 0; i < cols_needed.length - 1; i++) {
+            cols_needed[i] = group_columns[i];
         }
 
+        cols_needed[cols_needed.length - 1] = agg_column;
+
         String[][] trimmed_array = selectColumns(full_data_array, column_names, cols_needed);
-        writeToCsv(trimmed_array, cols_needed, "csv_file.csv");
+
+        writeToConsole(trimmed_array, cols_needed, "csv_file.csv");
 
         int fill = 12;
     }
