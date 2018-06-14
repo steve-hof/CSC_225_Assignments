@@ -29,6 +29,7 @@ public class Aggregate {
 
     }
 
+
     public static void writeToConsole(String[][] array, String[] header, String fileName) {
         for (int i = 0; i < header.length; i++) {
             System.out.printf(header[i]);
@@ -86,7 +87,14 @@ public class Aggregate {
         }
     }
 
-
+    public static String[] removeEmpty(String[] oversized_array) {
+        String[] removed_null = Arrays.stream(oversized_array)
+                .filter(value ->
+                        value != null && value.length() > 0
+                )
+                .toArray(size -> new String[size]);
+        return removed_null;
+    }
 
     public static void showUsage() {
         System.err.printf("Usage: java Aggregate <function> <aggregation column> <csv file> <group column 1> <group column 2> ...\n");
@@ -110,6 +118,70 @@ public class Aggregate {
         }
 
         return pruned_array;
+    }
+
+    public static String[] filterDuplicates(String [] duplicates_array) {
+        boolean already_have = false;
+        int count = duplicates_array.length;
+
+        for (int i = 0; i < count; i++) {
+            for (int j = i+1; j < count; j++) {
+                if(duplicates_array[i].equals(duplicates_array[j])) {
+                    duplicates_array[j] = duplicates_array[count-1];
+                    count--;
+                    j--;
+                }
+            }
+        }
+        String[] filtered_array = Arrays.copyOf(duplicates_array, count);
+
+        return filtered_array;
+    }
+
+    public static ArrayList<String[][]> performSplit(String[] key_list, String[][] input_array) {
+        ArrayList<String[][]> split_lists = new ArrayList<String[][]>();
+        int num_cols = input_array[0].length;
+
+        // go through each key and create 2d array of key with each value, then store in split_lists
+        for (int i = 0; i < key_list.length; i++) {
+            String curr_key = key_list[i];
+            for (int j = 0; j < input_array.length; j++) {
+                if (input_array[j][0].equals(curr_key)) {
+                    String[][] curr_split_array = new String[input_array.length][num_cols];
+                    for (int k = 0; k < )
+                }
+            }
+        }
+    }
+
+    public static String[][] performAggregate(String[][] input_array) {
+        // **** Split by group columns, output split_array(s) ****
+
+        // create array of keys
+        System.out.println("printing key array");
+        String[] key_array = new String[input_array.length];
+        for (int i = 0; i < input_array.length; i++) {
+            key_array[i] = input_array[i][0];
+        }
+
+        String[] unique_keys = filterDuplicates(key_array);
+
+        //
+        ArrayList<String[][]> split_arrays = performSplit(unique_keys, input_array);
+
+
+        // Apply function to each split_array, output applied_arrays
+
+
+
+
+        // Combine applied_arrays into combined_array, return combined_array
+
+
+
+
+        String[][] filler_array = new String[5][2];
+        return filler_array;
     }
 
     public static void main(String[] args) {
@@ -192,8 +264,9 @@ public class Aggregate {
         cols_needed[cols_needed.length - 1] = agg_column;
 
         String[][] trimmed_array = selectColumns(full_data_array, column_names, cols_needed);
+        String[][] finished_array = performAggregate(trimmed_array);
 
-        writeToConsole(trimmed_array, cols_needed, "csv_file.csv");
+        writeToConsole(finished_array, cols_needed, "csv_file.csv");
 
         int fill = 12;
     }
