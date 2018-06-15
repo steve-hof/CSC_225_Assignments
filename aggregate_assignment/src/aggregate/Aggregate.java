@@ -33,18 +33,18 @@ public class Aggregate {
 
     public static void writeToConsole(String[][] array, String[] header, String fileName) {
         for (int i = 0; i < header.length; i++) {
-            System.out.printf(header[i]);
-            System.out.printf(",");
+            System.out.print(header[i]);
+            System.out.print(",");
         }
 
-        System.out.printf("\n");
+        System.out.print("\n");
 
         for (String[] row : array) {
             for (int i = 0; i < row.length; i++) {
-                System.out.printf(row[i].toString());
-                System.out.printf(",");
+                System.out.print(row[i]);
+                System.out.print(",");
             }
-            System.out.printf("\n");
+            System.out.print("\n");
         }
     }
 
@@ -139,19 +139,47 @@ public class Aggregate {
         return filtered_array;
     }
 
-    public static String applyFunc(String[] data_column, String func) {
-//        String[] test_array = new String[2];
-        int num_rows = data_column.length;
+    public static float performSum(float[] agg_array) {
+        float agg_result = 0;
+        for (int i = 0; i < agg_array.length; i++) {
+            agg_result = agg_result + agg_array[i];
+        }
+        return agg_result;
+    }
+
+    public static float performCount(float[] agg_array) {
+        float agg_result = 0;
+        for (int i = 0; i < agg_array.length; i++) {
+            agg_result = agg_result + 1;
+        }
+        return agg_result;
+    }
+
+    public static float performAvg(float[] agg_array) {
+        float agg_result = 0;
+        float sum = performSum(agg_array);
+        float count = performCount(agg_array);
+        agg_result = sum / count;
+        return agg_result;
+    }
+
+    public static String applyFunc(ArrayList<String> data_column, String func) {
+        int num_rows = data_column.size();
         float agg_result = 0;
         float[] agg_array = new float[num_rows];
         for (int i = 0; i < num_rows; i++) {
-            agg_array[i] = convertNumeric(data_column[i]);
+            agg_array[i] = convertNumeric(data_column.get(i));
         }
         if (func.equals("sum")) {
-            for (int i = 0; i < agg_array.length; i++) {
-                agg_result = agg_result + agg_array[i];
-            }
+            agg_result = performSum(agg_array);
+
+        } else if (func.equals("count")) {
+            agg_result = performCount(agg_array);
+
+        } else if (func.equals("avg")) {
+            agg_result = performAvg(agg_array);
         }
+
         String agg_result_string = Float.toString(agg_result);
         return agg_result_string;
     }
@@ -161,30 +189,27 @@ public class Aggregate {
         int num_rows = sorted_list.size();
         ArrayList<String[]> combined_list = new ArrayList<>();
         for (String key : keys) {
-            String[] data_column = new String[] {"1", "2"};
-            ArrayList<String> temp = new ArrayList<>();
+//            String[] data_column = new String[] {"1", "2"};
+
+            // Create list of just data to send to apply_func
+            ArrayList<String> numeric_list = new ArrayList<>();
             for (int i = 0; i < sorted_list.size(); i++) {
-                String tosee = sorted_list.get(i)[0];
                 if (sorted_list.get(i)[0].equals(key)) {
-                    temp.add(sorted_list.get(i)[sub_array_length - 1]);
-                    int fill = 12;
+                    numeric_list.add(sorted_list.get(i)[sub_array_length - 1]);
                 }
-
-                data_column = temp.toArray(new String[temp.size()]);
             }
-
-            String result = applyFunc(data_column, func);
-            int fill = 27;
+            String aggregated_result = applyFunc(numeric_list, func);
+            String[] final_row = new String[] {key, aggregated_result};
+            combined_list.add(final_row);
 
         }
-
 
         return combined_list;
 
 
     }
 
-    public static ArrayList<String[]> performSplit(String[] keys, String[][] data_array) {
+    public static ArrayList<String[]> sortToList(String[] keys, String[][] data_array) {
 
         Arrays.sort(data_array, (entry1, entry2) -> {
             final String key_1 = entry1[0];
@@ -193,14 +218,14 @@ public class Aggregate {
         });
 
 
-        ArrayList<String[]> split_lists = new ArrayList<>();
+        ArrayList<String[]> sortedList = new ArrayList<>();
         for (String[] row : data_array) {
-            Collections.addAll(split_lists, row);
+            Collections.addAll(sortedList, row);
         }
 
 
 
-        return split_lists;
+        return sortedList;
 
     }
 
@@ -217,20 +242,14 @@ public class Aggregate {
         String[] unique_keys = filterDuplicates(key_array);
 
 
-        ArrayList<String[]> split_arrays = performSplit(unique_keys, input_array);
+        ArrayList<String[]> sortedList = sortToList(unique_keys, input_array);
 
 
         // Apply function to each split_array, output applied_arrays
-        ArrayList<String[]> completed_array = performApply(split_arrays, unique_keys, agg_func);
-
-
-
-        // Combine applied_arrays into combined_array, return combined_array
-
-
-
+        ArrayList<String[]> completed_list = performApply(sortedList, unique_keys, agg_func);
 
         String[][] filler_array = new String[5][2];
+
         return filler_array;
     }
 
@@ -316,7 +335,7 @@ public class Aggregate {
         String[][] trimmed_array = selectColumns(full_data_array, column_names, cols_needed);
         String[][] finished_array = performAggregate(trimmed_array, agg_function);
 
-//        writeToConsole(finished_array, cols_needed, "csv_file.csv");
+        writeToConsole(finished_array, cols_needed, "csv_file.csv");
 
         int fill = 12;
     }
