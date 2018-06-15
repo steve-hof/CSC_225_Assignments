@@ -139,27 +139,49 @@ public class Aggregate {
         return filtered_array;
     }
 
-    public static float applyFunc(String[][] input_array, String[] func) {
-        String[][] test_array = new String[2][2];
-        int num_cols = test_array[0].length;
-        int num_rows = test_array.length;
+    public static String applyFunc(String[] data_column, String func) {
+//        String[] test_array = new String[2];
+        int num_rows = data_column.length;
         float agg_result = 0;
         float[] agg_array = new float[num_rows];
         for (int i = 0; i < num_rows; i++) {
-            agg_array[i] = convertNumeric(test_array[i][num_cols - 1]);
+            agg_array[i] = convertNumeric(data_column[i]);
         }
         if (func.equals("sum")) {
             for (int i = 0; i < agg_array.length; i++) {
                 agg_result = agg_result + agg_array[i];
             }
         }
-        return agg_result;
+        String agg_result_string = Float.toString(agg_result);
+        return agg_result_string;
     }
-    public static String[][] performApply(ArrayList<String[]> sorted_list, String[] keys, String[] func) {
-        // for each key, retrieve those rows that contain the key and send them to applyFunc
 
-        String[][] combined = new String[16][2];
-        return combined;
+    public static ArrayList<String[]> performApply(ArrayList<String[]> sorted_list, String[] keys, String func) {
+        int sub_array_length = sorted_list.get(0).length;
+        int num_rows = sorted_list.size();
+        ArrayList<String[]> combined_list = new ArrayList<>();
+        for (String key : keys) {
+            String[] data_column = new String[] {"1", "2"};
+            ArrayList<String> temp = new ArrayList<>();
+            for (int i = 0; i < sorted_list.size(); i++) {
+                String tosee = sorted_list.get(i)[0];
+                if (sorted_list.get(i)[0].equals(key)) {
+                    temp.add(sorted_list.get(i)[sub_array_length - 1]);
+                    int fill = 12;
+                }
+
+                data_column = temp.toArray(new String[temp.size()]);
+            }
+
+            String result = applyFunc(data_column, func);
+            int fill = 27;
+
+        }
+
+
+        return combined_list;
+
+
     }
 
     public static ArrayList<String[]> performSplit(String[] keys, String[][] data_array) {
@@ -175,6 +197,7 @@ public class Aggregate {
         for (String[] row : data_array) {
             Collections.addAll(split_lists, row);
         }
+
 
 
         return split_lists;
@@ -198,7 +221,7 @@ public class Aggregate {
 
 
         // Apply function to each split_array, output applied_arrays
-        String[][] completed_array = performApply(split_arrays, unique_keys, agg_func);
+        ArrayList<String[]> completed_array = performApply(split_arrays, unique_keys, agg_func);
 
 
 
