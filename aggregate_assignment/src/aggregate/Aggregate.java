@@ -31,7 +31,7 @@ public class Aggregate {
     }
 
 
-    public static void writeToConsole(String[][] array, String[] header, String fileName) {
+    public static void writeToConsole(ArrayList<String[]> csv_list, String[] header) {
         for (int i = 0; i < header.length; i++) {
             System.out.print(header[i]);
             System.out.print(",");
@@ -39,9 +39,9 @@ public class Aggregate {
 
         System.out.print("\n");
 
-        for (String[] row : array) {
-            for (int i = 0; i < row.length; i++) {
-                System.out.print(row[i]);
+        for (String[] sub_list : csv_list) {
+            for (int i = 0; i < sub_list.length; i++) {
+                System.out.print(sub_list[i]);
                 System.out.print(",");
             }
             System.out.print("\n");
@@ -163,7 +163,8 @@ public class Aggregate {
         return agg_result;
     }
 
-    public static String applyFunc(ArrayList<String> data_column, String func) {
+
+    public static String applyFunc(ArrayList<String> data_column, String func, int num_distinct) {
         int num_rows = data_column.size();
         float agg_result = 0;
         float[] agg_array = new float[num_rows];
@@ -178,18 +179,20 @@ public class Aggregate {
 
         } else if (func.equals("avg")) {
             agg_result = performAvg(agg_array);
+
+        } else if (func.equals("count_distinct")) {
+            agg_result = (float)num_distinct;
         }
 
         String agg_result_string = Float.toString(agg_result);
         return agg_result_string;
     }
 
-    public static ArrayList<String[]> performApply(ArrayList<String[]> sorted_list, String[] keys, String func) {
+    public static ArrayList<String[]> performApply(ArrayList<String[]> sorted_list, String[] keys, String func, int num_distinct) {
         int sub_array_length = sorted_list.get(0).length;
-        int num_rows = sorted_list.size();
         ArrayList<String[]> combined_list = new ArrayList<>();
+        int key_count = 0;
         for (String key : keys) {
-//            String[] data_column = new String[] {"1", "2"};
 
             // Create list of just data to send to apply_func
             ArrayList<String> numeric_list = new ArrayList<>();
@@ -198,8 +201,14 @@ public class Aggregate {
                     numeric_list.add(sorted_list.get(i)[sub_array_length - 1]);
                 }
             }
-            String aggregated_result = applyFunc(numeric_list, func);
-            String[] final_row = new String[] {key, aggregated_result};
+            String aggregated_result = applyFunc(numeric_list, func, num_distinct);
+            String[] final_row = new String[sub_array_length];
+            final_row[0] = key;
+            for (int i = 1; i < sub_array_length - 1; i++) {
+                final_row[i] = sorted_list.get(key_count)[i];
+            }
+            final_row[sub_array_length - 1] = aggregated_result;
+
             combined_list.add(final_row);
 
         }
@@ -209,7 +218,7 @@ public class Aggregate {
 
     }
 
-    public static ArrayList<String[]> sortToList(String[] keys, String[][] data_array) {
+    public static ArrayList<String[]> sortToList(String[][] data_array) {
 
         Arrays.sort(data_array, (entry1, entry2) -> {
             final String key_1 = entry1[0];
@@ -223,34 +232,28 @@ public class Aggregate {
             Collections.addAll(sortedList, row);
         }
 
-
-
         return sortedList;
 
     }
 
-    public static String[][] performAggregate(String[][] input_array, String agg_func) {
+    public static ArrayList<String[]> performAggregate(String[][] input_array, String agg_func) {
         // **** Split by group columns, output split_array(s) ****
 
         // create array of keys
-        System.out.println("printing key array");
         String[] key_array = new String[input_array.length];
         for (int i = 0; i < input_array.length; i++) {
             key_array[i] = input_array[i][0];
         }
 
         String[] unique_keys = filterDuplicates(key_array);
+        int num_distinct = unique_keys.length;
+
+        ArrayList<String[]> sortedList = sortToList(input_array);
 
 
-        ArrayList<String[]> sortedList = sortToList(unique_keys, input_array);
+        ArrayList<String[]> completed_list = performApply(sortedList, unique_keys, agg_func, num_distinct);
 
-
-        // Apply function to each split_array, output applied_arrays
-        ArrayList<String[]> completed_list = performApply(sortedList, unique_keys, agg_func);
-
-        String[][] filler_array = new String[5][2];
-
-        return filler_array;
+        return completed_list;
     }
 
     public static void main(String[] args) {
@@ -333,9 +336,9 @@ public class Aggregate {
         cols_needed[cols_needed.length - 1] = agg_column;
 
         String[][] trimmed_array = selectColumns(full_data_array, column_names, cols_needed);
-        String[][] finished_array = performAggregate(trimmed_array, agg_function);
+        ArrayList<String[]> finished_list = performAggregate(trimmed_array, agg_function);
 
-        writeToConsole(finished_array, cols_needed, "csv_file.csv");
+        writeToConsole(finished_list, cols_needed);
 
         int fill = 12;
     }
