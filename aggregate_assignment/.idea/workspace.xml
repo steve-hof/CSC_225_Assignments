@@ -15,16 +15,18 @@
       <file leaf-file-name="Aggregate.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/aggregate/Aggregate.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
-              <caret line="150" column="40" lean-forward="false" selection-start-line="150" selection-start-column="40" selection-end-line="150" selection-end-column="40" />
+            <state relative-caret-position="523">
+              <caret line="155" column="26" lean-forward="false" selection-start-line="155" selection-start-column="26" selection-end-line="155" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#convertNumeric#0;class#Aggregate#0" expanded="false" />
                 <element signature="method#writeToConsole#0;class#Aggregate#0" expanded="false" />
                 <element signature="method#writeToCsv#0;class#Aggregate#0" expanded="false" />
+                <element signature="method#removeEmpty#0;class#Aggregate#0" expanded="false" />
                 <element signature="method#showUsage#0;class#Aggregate#0" expanded="false" />
-                <element signature="e#4476#4488#0" expanded="true" />
-                <element signature="e#7560#7570#0" expanded="true" />
+                <element signature="method#selectColumns#0;class#Aggregate#0" expanded="false" />
+                <element signature="method#filterDuplicates#0;class#Aggregate#0" expanded="false" />
+                <element signature="e#8366#8376#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -213,12 +215,12 @@
       <workItem from="1528559587805" duration="10165000" />
       <workItem from="1528641323933" duration="4360000" />
       <workItem from="1528845041796" duration="9789000" />
-      <workItem from="1528919082740" duration="12665000" />
+      <workItem from="1528919082740" duration="19676000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39208000" />
+    <option name="totallyTimeSpent" value="46219000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="0" />
@@ -238,7 +240,7 @@
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24798061" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29886913" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -260,12 +262,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>70</line>
+          <line>71</line>
           <properties />
           <option name="timeStamp" value="48" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
+          <line>166</line>
+          <properties />
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="87" />
+      <option name="time" value="90" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -279,9 +287,11 @@
             <element signature="method#convertNumeric#0;class#Aggregate#0" expanded="false" />
             <element signature="method#writeToConsole#0;class#Aggregate#0" expanded="false" />
             <element signature="method#writeToCsv#0;class#Aggregate#0" expanded="false" />
+            <element signature="method#removeEmpty#0;class#Aggregate#0" expanded="false" />
             <element signature="method#showUsage#0;class#Aggregate#0" expanded="false" />
-            <element signature="e#4476#4488#0" expanded="true" />
-            <element signature="e#7560#7570#0" expanded="true" />
+            <element signature="method#selectColumns#0;class#Aggregate#0" expanded="false" />
+            <element signature="method#filterDuplicates#0;class#Aggregate#0" expanded="false" />
+            <element signature="e#8366#8376#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -295,9 +305,11 @@
             <element signature="method#convertNumeric#0;class#Aggregate#0" expanded="false" />
             <element signature="method#writeToConsole#0;class#Aggregate#0" expanded="false" />
             <element signature="method#writeToCsv#0;class#Aggregate#0" expanded="false" />
+            <element signature="method#removeEmpty#0;class#Aggregate#0" expanded="false" />
             <element signature="method#showUsage#0;class#Aggregate#0" expanded="false" />
-            <element signature="e#4476#4488#0" expanded="true" />
-            <element signature="e#7560#7570#0" expanded="true" />
+            <element signature="method#selectColumns#0;class#Aggregate#0" expanded="false" />
+            <element signature="method#filterDuplicates#0;class#Aggregate#0" expanded="false" />
+            <element signature="e#8366#8376#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -311,9 +323,11 @@
             <element signature="method#convertNumeric#0;class#Aggregate#0" expanded="false" />
             <element signature="method#writeToConsole#0;class#Aggregate#0" expanded="false" />
             <element signature="method#writeToCsv#0;class#Aggregate#0" expanded="false" />
+            <element signature="method#removeEmpty#0;class#Aggregate#0" expanded="false" />
             <element signature="method#showUsage#0;class#Aggregate#0" expanded="false" />
-            <element signature="e#4476#4488#0" expanded="true" />
-            <element signature="e#7560#7570#0" expanded="true" />
+            <element signature="method#selectColumns#0;class#Aggregate#0" expanded="false" />
+            <element signature="method#filterDuplicates#0;class#Aggregate#0" expanded="false" />
+            <element signature="e#8366#8376#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -334,9 +348,11 @@
             <element signature="method#convertNumeric#0;class#Aggregate#0" expanded="false" />
             <element signature="method#writeToConsole#0;class#Aggregate#0" expanded="false" />
             <element signature="method#writeToCsv#0;class#Aggregate#0" expanded="false" />
+            <element signature="method#removeEmpty#0;class#Aggregate#0" expanded="false" />
             <element signature="method#showUsage#0;class#Aggregate#0" expanded="false" />
-            <element signature="e#4476#4488#0" expanded="true" />
-            <element signature="e#7560#7570#0" expanded="true" />
+            <element signature="method#selectColumns#0;class#Aggregate#0" expanded="false" />
+            <element signature="method#filterDuplicates#0;class#Aggregate#0" expanded="false" />
+            <element signature="e#8366#8376#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -369,18 +385,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Integer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="58" column="19" lean-forward="false" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/aggregate/Aggregate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="150" column="40" lean-forward="false" selection-start-line="150" selection-start-column="40" selection-end-line="150" selection-end-column="40" />
+        <state relative-caret-position="523">
+          <caret line="155" column="26" lean-forward="false" selection-start-line="155" selection-start-column="26" selection-end-line="155" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#convertNumeric#0;class#Aggregate#0" expanded="false" />
             <element signature="method#writeToConsole#0;class#Aggregate#0" expanded="false" />
             <element signature="method#writeToCsv#0;class#Aggregate#0" expanded="false" />
+            <element signature="method#removeEmpty#0;class#Aggregate#0" expanded="false" />
             <element signature="method#showUsage#0;class#Aggregate#0" expanded="false" />
-            <element signature="e#4476#4488#0" expanded="true" />
-            <element signature="e#7560#7570#0" expanded="true" />
+            <element signature="method#selectColumns#0;class#Aggregate#0" expanded="false" />
+            <element signature="method#filterDuplicates#0;class#Aggregate#0" expanded="false" />
+            <element signature="e#8366#8376#0" expanded="true" />
           </folding>
         </state>
       </provider>
