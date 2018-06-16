@@ -165,11 +165,27 @@ public class Aggregate {
         return agg_result;
     }
 
-
-    public static String applyFunc(ArrayList<String> data_column, String func) {
+    private static float performDistinct(ArrayList<String> total_list) {
+        Collections.sort(total_list);
+        float count = 1;
+        for (int k = 0; k < total_list.size() - 1; k++) {
+            int j = k + 1;
+            if(!total_list.get(k).equals(total_list.get(j))) {
+                count++;
+            }
+        }
+        return count;
+    }
+    private static String applyFunc(ArrayList<String> data_column, String func) {
         int num_rows = data_column.size();
         float agg_result = 0;
         float[] agg_array = new float[num_rows];
+        if (func.equals("count_distinct")) {
+            agg_result = performDistinct(data_column);
+
+            return Float.toString(agg_result);
+        }
+
         for (int i = 0; i < num_rows; i++) {
             agg_array[i] = convertNumeric(data_column.get(i));
         }
@@ -181,11 +197,7 @@ public class Aggregate {
 
         } else if (func.equals("avg")) {
             agg_result = performAvg(agg_array);
-
         }
-//        else if (func.equals("count_distinct")) {
-//            agg_result = (float)num_distinct;
-//        }
 
         String agg_result_string = Float.toString(agg_result);
         return agg_result_string;
@@ -249,17 +261,16 @@ public class Aggregate {
 
         }
 
-        String[] cols_needed_minus_data = new String[cols_needed.length - 1];
-        for (int i = 0; i < cols_needed.length - 1; i++) {
-            cols_needed_minus_data[i] = cols_needed[i];
-        }
+//        String[] cols_needed_minus_data = new String[cols_needed.length - 1];
+//        for (int i = 0; i < cols_needed.length - 1; i++) {
+//            cols_needed_minus_data[i] = cols_needed[i];
+//        }
 
         ArrayList<ArrayList<String[]>> big_list = new ArrayList<>();
         big_list.add(sorted_list);
 
         for (int i = 0; i < key_list.size(); i++) {
             big_list = performSplit(i, big_list, key_list.get(i));
-            int fill = 12;
         }
 
         ArrayList<String[]> final_list = new ArrayList<>();
@@ -281,7 +292,6 @@ public class Aggregate {
 
                 final_agg[data_col_num] = applyFunc(data_col, agg_func);
                 final_list.add(final_agg);
-                int DEBUG = 2;
             }
 
             split_list_num++;
@@ -307,7 +317,7 @@ public class Aggregate {
 
         if (!agg_function.equals("count") && !agg_function.equals("count_distinct")
                 && !agg_function.equals("sum") && !agg_function.equals("avg")) {
-            System.out.println("Looking for data file");
+            System.out.println("Looking for file");
             showUsage();
             return;
         }
@@ -348,7 +358,7 @@ public class Aggregate {
                 csvData.add(row_array);
             }
         } catch (IOException e) {
-            System.err.printf("Error reading file\n", csv_filename);
+            System.err.printf("Error reading file %s\n", csv_filename);
             return;
         }
 //        if (row_line == null) {
@@ -367,12 +377,12 @@ public class Aggregate {
         for (int i = 0; i < cols_needed.length - 1; i++) {
             cols_needed[i] = group_columns[i];
         }
-
+        String final_col = agg_function + "(" + agg_column + ")";
         cols_needed[cols_needed.length - 1] = agg_column;
 
         String[][] trimmed_array = selectColumns(full_data_array, column_names, cols_needed);
         ArrayList<String[]> finished_list = performAggregate(trimmed_array, agg_function, cols_needed);
-
+        cols_needed[cols_needed.length - 1] = final_col;
         writeToConsole(finished_list, cols_needed);
 
         int fill = 12;
