@@ -1,5 +1,3 @@
-package aggregate;
-
 /* Aggregate.java
    CSC 225 - Summer 2018
 
@@ -346,7 +344,7 @@ public class Aggregate {
         csvData.toArray(full_data_array);
 
         /* create array of columns in proper order based on command line args
-         * the column being aggregated is turned into floats and added at the end*/
+        * the column being aggregated is turned into floats and added at the end*/
 
         String[] cols_needed = new String[group_columns.length + 1];
 
