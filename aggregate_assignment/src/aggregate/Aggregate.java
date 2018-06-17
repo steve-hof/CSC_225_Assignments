@@ -40,26 +40,16 @@ public class Aggregate {
      */
 
     private static void writeToConsole(ArrayList<String[]> csv_list, String[] header) {
-//        for (String aHeader : header) {
-//            System.out.print(aHeader);
-//            System.out.print(",");
-//        }
+        // Print header
         System.out.print(header[0]);
         for (int i = 1; i < header.length; i++) {
             System.out.print(",");
             System.out.print(header[i]);
         }
+
         System.out.print("\n");
 
-//        for (String[] sub_list : csv_list) {
-//            for (String aSub_list : sub_list) {
-//                System.out.print(aSub_list);
-//                System.out.print(",");
-//            }
-//            System.out.print("\n");
-//        }
-
-
+        // print data
         for (int i = 0; i < csv_list.size(); i++) {
             System.out.print(csv_list.get(i)[0]);
             for (int j = 1; j < csv_list.get(i).length; j++) {
@@ -69,8 +59,6 @@ public class Aggregate {
 
             System.out.print("\n");
         }
-
-
     }
 
     // Running Time: O(1)
@@ -120,19 +108,7 @@ public class Aggregate {
 
      */
 
-
     private static String[] filterDuplicates(String[] duplicates_array) {
-//        int count = duplicates_array.length;
-//
-//        for (int i = 0; i < count; i++) {
-//            for (int j = i + 1; j < count; j++) {
-//                if (duplicates_array[i].equals(duplicates_array[j])) {
-//                    duplicates_array[j] = duplicates_array[count - 1];
-//                    count--;
-//                    j--;
-//                }
-//            }
-//        }
 
         // sort O(nlogn)
         Arrays.sort(duplicates_array);
@@ -153,6 +129,7 @@ public class Aggregate {
 
         return filtered_array;
     }
+
 
     /*
          ************************ perform____ (func) ************************
@@ -419,9 +396,7 @@ public class Aggregate {
         cols_needed[cols_needed.length - 1] = final_col;
 
         writeToConsole(finished_list, cols_needed);
-
-        int fill = 12;
-    }
+        }
 
 }
 

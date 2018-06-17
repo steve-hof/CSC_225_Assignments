@@ -18,8 +18,8 @@
       <file leaf-file-name="Aggregate.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/aggregate/Aggregate.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="422" column="0" lean-forward="false" selection-start-line="422" selection-start-column="0" selection-end-line="422" selection-end-column="0" />
+            <state relative-caret-position="448">
+              <caret line="398" column="8" lean-forward="false" selection-start-line="398" selection-start-column="8" selection-end-line="398" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#showUsage#0;class#Aggregate#0" expanded="false" />
@@ -183,7 +183,7 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="aggregate.Aggregate" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="count_distinct grade table_of_grades.csv course_subject course_num" />
+      <option name="PROGRAM_PARAMETERS" value="avg grade table_of_grades.csv course_subject" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -238,15 +238,16 @@
       <workItem from="1528845041796" duration="9789000" />
       <workItem from="1528919082740" duration="28772000" />
       <workItem from="1529158836674" duration="21290000" />
-      <workItem from="1529239592651" duration="8517000" />
+      <workItem from="1529239592651" duration="9263000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91789000" />
+    <option name="totallyTimeSpent" value="92535000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -262,7 +263,7 @@
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30452344" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30452344" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -284,90 +285,54 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>422</line>
-          <properties />
-          <option name="timeStamp" value="137" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>420</line>
+          <line>397</line>
           <properties />
           <option name="timeStamp" value="214" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>418</line>
+          <line>395</line>
           <properties />
           <option name="timeStamp" value="249" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>124</line>
+          <line>236</line>
           <properties />
-          <option name="timeStamp" value="253" />
+          <option name="timeStamp" value="282" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>126</line>
+          <line>238</line>
           <properties />
-          <option name="timeStamp" value="254" />
+          <option name="timeStamp" value="283" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>127</line>
+          <line>250</line>
           <properties />
-          <option name="timeStamp" value="255" />
+          <option name="timeStamp" value="284" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>129</line>
+          <line>241</line>
           <properties />
-          <option name="timeStamp" value="256" />
+          <option name="timeStamp" value="285" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>128</line>
+          <line>239</line>
           <properties />
-          <option name="timeStamp" value="257" />
+          <option name="timeStamp" value="286" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>131</line>
+          <line>285</line>
           <properties />
-          <option name="timeStamp" value="258" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>62</line>
-          <properties />
-          <option name="timeStamp" value="277" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>63</line>
-          <properties />
-          <option name="timeStamp" value="278" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>65</line>
-          <properties />
-          <option name="timeStamp" value="279" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>66</line>
-          <properties />
-          <option name="timeStamp" value="280" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>69</line>
-          <properties />
-          <option name="timeStamp" value="281" />
+          <option name="timeStamp" value="287" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="282" />
+      <option name="time" value="288" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -515,8 +480,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/aggregate/Aggregate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="422" column="0" lean-forward="false" selection-start-line="422" selection-start-column="0" selection-end-line="422" selection-end-column="0" />
+        <state relative-caret-position="448">
+          <caret line="398" column="8" lean-forward="false" selection-start-line="398" selection-start-column="8" selection-end-line="398" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#showUsage#0;class#Aggregate#0" expanded="false" />
