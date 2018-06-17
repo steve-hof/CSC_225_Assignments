@@ -87,7 +87,12 @@ public class Aggregate {
             for (int j = 0; j < col_names.length; j++) {
                 if (keep_cols[i].equals(col_names[j])) {
                     for (int k = 0; k < num_rows; k++) {
-                        pruned_array[k][i] = array[k][j];
+                        if (j >= array[k].length) {
+                            continue;
+                        } else {
+                            pruned_array[k][i] = array[k][j];
+                        }
+
                     }
                 }
             }
@@ -150,9 +155,7 @@ public class Aggregate {
 
     private static float performCount(float[] agg_array) {
         float agg_result = agg_array.length;
-//        for (int i = 0; i < agg_array.length; i++) {
-//            agg_result = agg_result + 1;
-//        }
+
         return agg_result;
     }
 
@@ -302,7 +305,11 @@ public class Aggregate {
                 for (int j = 0; j < split_list.size(); j++) {
                     data_col.add(split_list.get(j)[data_col_num]);
                 }
-
+                /*
+                    got the remove all function below from:
+                    https://stackoverflow.com/questions/4819635/how-to-remove-all-null-elements-from-a-arraylist-or-string-array
+                 */
+                data_col.removeAll(Collections.singleton(null));
                 final_agg[data_col_num] = applyFunc(data_col, agg_func);
                 final_list.add(final_agg);
             }
