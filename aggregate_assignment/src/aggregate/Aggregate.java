@@ -149,10 +149,10 @@ public class Aggregate {
 
 
     private static float performCount(float[] agg_array) {
-        float agg_result = 0;
-        for (int i = 0; i < agg_array.length; i++) {
-            agg_result = agg_result + 1;
-        }
+        float agg_result = agg_array.length;
+//        for (int i = 0; i < agg_array.length; i++) {
+//            agg_result = agg_result + 1;
+//        }
         return agg_result;
     }
 
@@ -160,7 +160,7 @@ public class Aggregate {
     private static float performAvg(float[] agg_array) {
         float agg_result;
         float sum = performSum(agg_array);
-        float count = performCount(agg_array);
+        float count = agg_array.length;
         agg_result = sum / count;
         return agg_result;
     }
@@ -205,8 +205,11 @@ public class Aggregate {
         float[] agg_array = new float[num_rows];
         if (func.equals("count_distinct")) {
             agg_result = performDistinct(data_column);
-
             return Float.toString(agg_result);
+
+        } else if (func.equals("count")) {
+            agg_result = performCount(agg_array);
+            return Float.toString((agg_result));
         }
 
         for (int i = 0; i < num_rows; i++) {
@@ -214,9 +217,6 @@ public class Aggregate {
         }
         if (func.equals("sum")) {
             agg_result = performSum(agg_array);
-
-        } else if (func.equals("count")) {
-            agg_result = performCount(agg_array);
 
         } else if (func.equals("avg")) {
             agg_result = performAvg(agg_array);
@@ -396,7 +396,9 @@ public class Aggregate {
         cols_needed[cols_needed.length - 1] = final_col;
 
         writeToConsole(finished_list, cols_needed);
-        }
+
+        int DEBUG = 2;
+    }
 
 }
 
