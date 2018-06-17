@@ -14,97 +14,41 @@ package aggregate;
 
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.util.*; //ArrayList;
+import java.util.*;
 import java.util.ArrayList;
 
 
 public class Aggregate {
 
-    // The first line of this method was taken from Stack Overflow https://stackoverflow.com/questions/14206768/how-to-check-if-a-string-is-numeric
-    public boolean isNumeric(String s) {
-        return s != null && s.matches("[-+]?\\d*\\.?\\d+");
-    }
-
-    public static float convertNumeric(String element) {
+    private static float convertNumeric(String element) {
         float float_element = Float.valueOf(element);
         return float_element;
 
     }
 
-
-    public static void writeToConsole(ArrayList<String[]> csv_list, String[] header) {
-        for (int i = 0; i < header.length; i++) {
-            System.out.print(header[i]);
+    private static void writeToConsole(ArrayList<String[]> csv_list, String[] header) {
+        for (String aHeader : header) {
+            System.out.print(aHeader);
             System.out.print(",");
         }
 
         System.out.print("\n");
 
         for (String[] sub_list : csv_list) {
-            for (int i = 0; i < sub_list.length; i++) {
-                System.out.print(sub_list[i]);
+            for (String aSub_list : sub_list) {
+                System.out.print(aSub_list);
                 System.out.print(",");
             }
             System.out.print("\n");
         }
     }
 
-    public static void writeToCsv(String[][] array, String[] header, String fileName) {
-        FileWriter fileWriter = null;
-
-        try {
-            fileWriter = new FileWriter(fileName);
-
-            //Write the CSV file header
-            for (int i = 0; i < header.length; i++) {
-                fileWriter.append(header[i]);
-                fileWriter.append(",");
-            }
-
-            //Add a new line separator after the header
-            fileWriter.append("\n");
-
-            for (String[] row : array) {
-                for (int i = 0; i < row.length; i++) {
-                    fileWriter.append(row[i].toString());
-                    fileWriter.append(",");
-                }
-                fileWriter.append("\n");
-
-            }
-
-        } catch (Exception e) {
-            System.out.println("Error in CsvFileWriter !!!");
-            e.printStackTrace();
-        } finally {
-
-            try {
-                fileWriter.flush();
-                fileWriter.close();
-            } catch (IOException e) {
-                System.out.println("Error while flushing/closing fileWriter !!!");
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-    public static String[] removeEmpty(String[] oversized_array) {
-        String[] removed_null = Arrays.stream(oversized_array)
-                .filter(value ->
-                        value != null && value.length() > 0
-                )
-                .toArray(size -> new String[size]);
-        return removed_null;
-    }
-
-    public static void showUsage() {
+    private static void showUsage() {
         System.err.printf("Usage: java Aggregate <function> <aggregation column> <csv file> <group column 1> <group column 2> ...\n");
         System.err.printf("Where <function> is one of \"count\", \"count_distinct\", \"sum\", \"avg\"\n");
     }
 
-    public static String[][] selectColumns(String[][] array, String[] col_names, String[] keep_cols) {
+    private static String[][] selectColumns(String[][] array, String[] col_names, String[] keep_cols) {
 
         int num_rows = array.length;
         int num_cols = keep_cols.length;
@@ -123,14 +67,13 @@ public class Aggregate {
         return pruned_array;
     }
 
-    public static String[] filterDuplicates(String [] duplicates_array) {
-        boolean already_have = false;
+    private static String[] filterDuplicates(String[] duplicates_array) {
         int count = duplicates_array.length;
 
         for (int i = 0; i < count; i++) {
-            for (int j = i+1; j < count; j++) {
-                if(duplicates_array[i].equals(duplicates_array[j])) {
-                    duplicates_array[j] = duplicates_array[count-1];
+            for (int j = i + 1; j < count; j++) {
+                if (duplicates_array[i].equals(duplicates_array[j])) {
+                    duplicates_array[j] = duplicates_array[count - 1];
                     count--;
                     j--;
                 }
@@ -141,7 +84,7 @@ public class Aggregate {
         return filtered_array;
     }
 
-    public static float performSum(float[] agg_array) {
+    private static float performSum(float[] agg_array) {
         float agg_result = 0;
         for (int i = 0; i < agg_array.length; i++) {
             agg_result = agg_result + agg_array[i];
@@ -149,7 +92,7 @@ public class Aggregate {
         return agg_result;
     }
 
-    public static float performCount(float[] agg_array) {
+    private static float performCount(float[] agg_array) {
         float agg_result = 0;
         for (int i = 0; i < agg_array.length; i++) {
             agg_result = agg_result + 1;
@@ -157,8 +100,8 @@ public class Aggregate {
         return agg_result;
     }
 
-    public static float performAvg(float[] agg_array) {
-        float agg_result = 0;
+    private static float performAvg(float[] agg_array) {
+        float agg_result;
         float sum = performSum(agg_array);
         float count = performCount(agg_array);
         agg_result = sum / count;
@@ -170,12 +113,13 @@ public class Aggregate {
         float count = 1;
         for (int k = 0; k < total_list.size() - 1; k++) {
             int j = k + 1;
-            if(!total_list.get(k).equals(total_list.get(j))) {
+            if (!total_list.get(k).equals(total_list.get(j))) {
                 count++;
             }
         }
         return count;
     }
+
     private static String applyFunc(ArrayList<String> data_column, String func) {
         int num_rows = data_column.size();
         float agg_result = 0;
@@ -199,10 +143,8 @@ public class Aggregate {
             agg_result = performAvg(agg_array);
         }
 
-        String agg_result_string = Float.toString(agg_result);
-        return agg_result_string;
+        return Float.toString(agg_result);
     }
-
 
 
     private static ArrayList<String[]> sortToList(String[][] data_array) {
@@ -223,7 +165,7 @@ public class Aggregate {
     }
 
 
-    private static ArrayList<ArrayList<String[]>>performSplit(int sort_column, ArrayList<ArrayList<String[]>> data, String[] keys) {
+    private static ArrayList<ArrayList<String[]>> performSplit(int sort_column, ArrayList<ArrayList<String[]>> data, String[] keys) {
         ArrayList<ArrayList<String[]>> smaller_lists = new ArrayList<>();
 
         for (ArrayList<String[]> sublist : data) {
@@ -237,7 +179,6 @@ public class Aggregate {
                 smaller_lists.add(templist);
             }
         }
-
 
         return smaller_lists;
     }
@@ -261,11 +202,6 @@ public class Aggregate {
 
         }
 
-//        String[] cols_needed_minus_data = new String[cols_needed.length - 1];
-//        for (int i = 0; i < cols_needed.length - 1; i++) {
-//            cols_needed_minus_data[i] = cols_needed[i];
-//        }
-
         ArrayList<ArrayList<String[]>> big_list = new ArrayList<>();
         big_list.add(sorted_list);
 
@@ -274,7 +210,6 @@ public class Aggregate {
         }
 
         ArrayList<String[]> final_list = new ArrayList<>();
-        int split_list_num = 0;
         for (ArrayList<String[]> split_list : big_list) {
             if (split_list.size() > 0) {
 
@@ -293,9 +228,6 @@ public class Aggregate {
                 final_agg[data_col_num] = applyFunc(data_col, agg_func);
                 final_list.add(final_agg);
             }
-
-            split_list_num++;
-
         }
 
         return final_list;
@@ -349,7 +281,7 @@ public class Aggregate {
         String[] column_names = header_line.split(",");
 
         String row_line;
-        ArrayList<String[]> csvData = new ArrayList<String[]>();
+        ArrayList<String[]> csvData = new ArrayList<>();
 
         try {
             while ((row_line = br.readLine()) != null) {
@@ -361,10 +293,7 @@ public class Aggregate {
             System.err.printf("Error reading file %s\n", csv_filename);
             return;
         }
-//        if (row_line == null) {
-//            System.err.printf("The file doesn't seem to have any data there fella", csv_filename);
-//            return;
-//        }
+
         // Turn ArrayList into 2D array
         String[][] full_data_array = new String[csvData.size()][column_names.length];
         csvData.toArray(full_data_array);

@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6458bc4e-df53-460a-8584-9047e1581a97" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../225k18_programming_assignment1.pdf" afterPath="$PROJECT_DIR$/../225k18_programming_assignment1.pdf" />
+      <change beforePath="$PROJECT_DIR$/src/aggregate/Aggregate.java" afterPath="$PROJECT_DIR$/src/aggregate/Aggregate.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,11 +18,10 @@
       <file leaf-file-name="Aggregate.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/aggregate/Aggregate.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="375" column="0" lean-forward="true" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
+            <state relative-caret-position="367">
+              <caret line="43" column="5" lean-forward="true" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
               <folding>
-                <element signature="method#writeToCsv#0;class#Aggregate#0" expanded="false" />
-                <element signature="method#removeEmpty#0;class#Aggregate#0" expanded="false" />
+                <element signature="imports" expanded="true" />
                 <element signature="method#selectColumns#0;class#Aggregate#0" expanded="false" />
               </folding>
             </state>
@@ -226,12 +226,12 @@
       <workItem from="1528641323933" duration="4360000" />
       <workItem from="1528845041796" duration="9789000" />
       <workItem from="1528919082740" duration="28772000" />
-      <workItem from="1529158836674" duration="17923000" />
+      <workItem from="1529158836674" duration="18441000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79905000" />
+    <option name="totallyTimeSpent" value="80423000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="0" />
@@ -246,7 +246,7 @@
       <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28029078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10096931" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.10096931" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -273,21 +273,15 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>387</line>
+          <line>316</line>
           <properties />
           <option name="timeStamp" value="137" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>385</line>
+          <line>314</line>
           <properties />
           <option name="timeStamp" value="214" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/aggregate/Aggregate.java</url>
-          <line>327</line>
-          <properties />
-          <option name="timeStamp" value="242" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="243" />
@@ -480,7 +474,7 @@
         <state relative-caret-position="363">
           <caret line="381" column="18" lean-forward="false" selection-start-line="381" selection-start-column="18" selection-end-line="381" selection-end-column="18" />
           <folding>
-            <element signature="e#0#12832#0" expanded="true" />
+            <element signature="e#0#12832#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -519,11 +513,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/aggregate/Aggregate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="375" column="0" lean-forward="true" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
+        <state relative-caret-position="367">
+          <caret line="43" column="5" lean-forward="true" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
           <folding>
-            <element signature="method#writeToCsv#0;class#Aggregate#0" expanded="false" />
-            <element signature="method#removeEmpty#0;class#Aggregate#0" expanded="false" />
+            <element signature="imports" expanded="true" />
             <element signature="method#selectColumns#0;class#Aggregate#0" expanded="false" />
           </folding>
         </state>
