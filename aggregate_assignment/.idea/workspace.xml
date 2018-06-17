@@ -3,31 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6458bc4e-df53-460a-8584-9047e1581a97" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../225k18_programming_assignment1.pdf" afterPath="$PROJECT_DIR$/../225k18_programming_assignment1.pdf" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Aggregate.java" afterPath="$PROJECT_DIR$/Aggregate.java" />
-      <change beforePath="$PROJECT_DIR$/data/2001-2011_census_population.csv" afterPath="$PROJECT_DIR$/2001-2011_census_population.csv" />
-      <change beforePath="$PROJECT_DIR$/data/ferries_Apr2018.csv" afterPath="$PROJECT_DIR$/ferries_Apr2018.csv" />
-      <change beforePath="$PROJECT_DIR$/data/ferries_FebMarApr2018.csv" afterPath="$PROJECT_DIR$/ferries_FebMarApr2018.csv" />
-      <change beforePath="$PROJECT_DIR$/data/ferries_JanFebMarApr2018.csv" afterPath="$PROJECT_DIR$/ferries_JanFebMarApr2018.csv" />
-      <change beforePath="$PROJECT_DIR$/data/ferries_MarApr2018.csv" afterPath="$PROJECT_DIR$/ferries_MarApr2018.csv" />
-      <change beforePath="$PROJECT_DIR$/data/table_of_grades.csv" afterPath="$PROJECT_DIR$/table_of_grades.csv" />
-      <change beforePath="$PROJECT_DIR$/data/vwsn_April2018_data.csv" afterPath="$PROJECT_DIR$/vwsn_April2018_data.csv" />
-      <change beforePath="$PROJECT_DIR$/out/production/aggregate_assignment/aggregate/Aggregate.class" afterPath="$PROJECT_DIR$/out/production/aggregate_assignment/aggregate/Aggregate.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/aggregate_assignment/aggregate/data/2001-2011_census_population.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/aggregate_assignment/aggregate/data/ferries_Apr2018.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/aggregate_assignment/aggregate/data/ferries_FebMarApr2018.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/aggregate_assignment/aggregate/data/ferries_JanFebMarApr2018.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/aggregate_assignment/aggregate/data/ferries_MarApr2018.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/aggregate_assignment/aggregate/data/table_of_grades.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/production/aggregate_assignment/aggregate/data/vwsn_April2018_data.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/aggregate/Aggregate.java" afterPath="$PROJECT_DIR$/src/aggregate/Aggregate.java" />
-      <change beforePath="$PROJECT_DIR$/src/aggregate/data/2001-2011_census_population.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/aggregate/data/ferries_Apr2018.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/aggregate/data/ferries_FebMarApr2018.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/aggregate/data/ferries_JanFebMarApr2018.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/aggregate/data/ferries_MarApr2018.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/aggregate/data/table_of_grades.csv" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/aggregate/data/vwsn_April2018_data.csv" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -197,7 +172,7 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="aggregate.Aggregate" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="avg population 2001-2011_census_population.csv province division" />
+      <option name="PROGRAM_PARAMETERS" value="count_distinct vessel_name ferries_MarApr2018.csv source destination" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -251,12 +226,12 @@
       <workItem from="1528641323933" duration="4360000" />
       <workItem from="1528845041796" duration="9789000" />
       <workItem from="1528919082740" duration="28772000" />
-      <workItem from="1529158836674" duration="17547000" />
+      <workItem from="1529158836674" duration="17923000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79529000" />
+    <option name="totallyTimeSpent" value="79905000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="0" />
@@ -268,10 +243,10 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2786753" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28029078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19628432" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10096931" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -527,6 +502,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/aggregate/ferries_Apr2018.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aggregate/ferries_MarApr2018.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
