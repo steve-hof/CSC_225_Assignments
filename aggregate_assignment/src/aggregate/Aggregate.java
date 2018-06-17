@@ -19,49 +19,76 @@ import java.util.ArrayList;
 
 
 public class Aggregate {
-    /* Converts string element to float */
+
+    /* Running Time: O(1) */
     private static float convertNumeric(String element) {
         float float_element = Float.valueOf(element);
+
         return float_element;
-
     }
-    /* Prints aggregated csv file to standard out
-        input:  String array with appropriate column headings
-                ArrayList with each row of the csv as an array
 
 
+    /*
+        ************************ writeToConsole ************************
+        * Printing the header does not depend on number of rows so O(1)
+        *
+        * The the outer nested for loop could be n in the worst case,
+        * however, the inner for loop depends on the number of columns
+        * to aggregate, not on the number of samples (rows)
+        *
+        * ******** Running Time: O(n)
      */
-    private static void writeToConsole(ArrayList<String[]> csv_list, String[] header) {
-        for (String aHeader : header) {
-            System.out.print(aHeader);
-            System.out.print(",");
-        }
 
+    private static void writeToConsole(ArrayList<String[]> csv_list, String[] header) {
+//        for (String aHeader : header) {
+//            System.out.print(aHeader);
+//            System.out.print(",");
+//        }
+        System.out.print(header[0]);
+        for (int i = 1; i < header.length; i++) {
+            System.out.print(",");
+            System.out.print(header[i]);
+        }
         System.out.print("\n");
 
-        for (String[] sub_list : csv_list) {
-            for (String aSub_list : sub_list) {
-                System.out.print(aSub_list);
+//        for (String[] sub_list : csv_list) {
+//            for (String aSub_list : sub_list) {
+//                System.out.print(aSub_list);
+//                System.out.print(",");
+//            }
+//            System.out.print("\n");
+//        }
+
+
+        for (int i = 0; i < csv_list.size(); i++) {
+            System.out.print(csv_list.get(i)[0]);
+            for (int j = 1; j < csv_list.get(i).length; j++) {
                 System.out.print(",");
+                System.out.print(csv_list.get(i)[j]);
             }
+
             System.out.print("\n");
         }
+
+
     }
 
+    // Running Time: O(1)
     private static void showUsage() {
         System.err.printf("Usage: java Aggregate <function> <aggregation column> <csv file> <group column 1> <group column 2> ...\n");
         System.err.printf("Where <function> is one of \"count\", \"count_distinct\", \"sum\", \"avg\"\n");
     }
 
+
     /*
-        selectColumns takes an array representing the entire csv file and copies
-        the necessary columns into a new 2d array.
+        ************************ selectColumns ************************
+        * Although there is a 3 level nested loop, only the last for loop is
+        * a function of the number of samples (rows), therefore
+        *
+        * ***** Running Time: O(n)
+        *
+    */
 
-        Although there is a 3 level nested loop, only the last for loop is a function
-        of the number of rows of the csv, so this runs in O(n) time
-
-        *** O(n) ***
-     */
     private static String[][] selectColumns(String[][] array, String[] col_names, String[] keep_cols) {
 
         int num_rows = array.length;
@@ -83,38 +110,56 @@ public class Aggregate {
 
     /*
      ************************ filter_duplicates ************************
+     * Arrays.sort (for objects) is guaranteed O(nlogn)
      *
+     * My filtering algorithm consists of one for loop that is O(n)
      *
      * Arrays.copyOf runs in O(n)
      *
+     * ******* Running Time: O(nlogn)
 
      */
 
 
     private static String[] filterDuplicates(String[] duplicates_array) {
-        int count = duplicates_array.length;
+//        int count = duplicates_array.length;
+//
+//        for (int i = 0; i < count; i++) {
+//            for (int j = i + 1; j < count; j++) {
+//                if (duplicates_array[i].equals(duplicates_array[j])) {
+//                    duplicates_array[j] = duplicates_array[count - 1];
+//                    count--;
+//                    j--;
+//                }
+//            }
+//        }
 
-        for (int i = 0; i < count; i++) {
-            for (int j = i + 1; j < count; j++) {
-                if (duplicates_array[i].equals(duplicates_array[j])) {
-                    duplicates_array[j] = duplicates_array[count - 1];
-                    count--;
-                    j--;
-                }
+        // sort O(nlogn)
+        Arrays.sort(duplicates_array);
+
+        // filtering algorithm is O(n)
+        int count = 1;
+        String[] filtered_array = new String[duplicates_array.length];
+        filtered_array[0] = duplicates_array[0];
+        for (int i = 0; i < duplicates_array.length - 1; i++) {
+            int j = i + 1;
+            if (!duplicates_array[i].equals(duplicates_array[j])) {
+                filtered_array[count] = duplicates_array[j];
+                count++;
             }
         }
 
-        String[] filtered_array = Arrays.copyOf(duplicates_array, count);
+        filtered_array = Arrays.copyOf(filtered_array, count);
 
         return filtered_array;
     }
 
     /*
-     ************************ perform____ (func) ************************
-     * All of performSum, performCount, performAvg are a single for loop
-     * that depends on n.
-     *
-     * *********** Running Time: O(n) (for all three methods)
+         ************************ perform____ (func) ************************
+         * All of performSum, performCount, performAvg are a single for loop
+         * that depends on n.
+         *
+         * *********** Running Time: O(n) (for all three methods)
      */
 
     private static float performSum(float[] agg_array) {
@@ -145,15 +190,15 @@ public class Aggregate {
 
 
     /*
-     ************************ performDistinct ************************
-     * documentation: https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html
-     *
-     * According to documentation above, Collections.sort uses a modified merge sort and
-     * its running time is O(nlogn)
-     *
-     * The for loop runs in O(n)
-     *
-     * ********* Running Time: O(nlogn)
+         ************************ performDistinct ************************
+         * documentation: https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html
+         *
+         * According to documentation above, Collections.sort uses a modified merge sort and
+         * its running time is O(nlogn)
+         *
+         * The for loop runs in O(n)
+         *
+         * ********* Running Time: O(nlogn)
      */
 
     private static float performDistinct(ArrayList<String> total_list) {
@@ -168,12 +213,13 @@ public class Aggregate {
         return count;
     }
 
+
     /*  ************************ applyFunc ************************
         * Takes in the column that the aggregate function is being applied to,
         * converts the elements to floats if necessary and passes it on to the
         * appropriate function.
 
-        *** O(n) ***
+        ******nRunning Time: O(n)
 
     */
     private static String applyFunc(ArrayList<String> data_column, String func) {
@@ -203,27 +249,12 @@ public class Aggregate {
     }
 
 
-//    private static ArrayList<String[]> sortToList(String[][] data_array) {
-//
-//        Arrays.sort(data_array, (entry1, entry2) -> {
-//            final String key_1 = entry1[0];
-//            final String key_2 = entry2[0];
-//            return key_1.compareTo(key_2);
-//        });
-//
-//
-//        ArrayList<String[]> sortedList = new ArrayList<>();
-//        for (String[] row : data_array) {
-//            Collections.addAll(sortedList, row);
-//        }
-//
-//        return sortedList;
-//    }
-
     /*
         ************************ performSplit ************************
+        * STILL NEED TO FIGURE OUT
         *
         *
+        * ******* Running Time: ?
      */
     private static ArrayList<ArrayList<String[]>> performSplit(int sort_column, ArrayList<ArrayList<String[]>> data, String[] keys) {
         ArrayList<ArrayList<String[]>> smaller_lists = new ArrayList<>();
@@ -243,15 +274,20 @@ public class Aggregate {
         return smaller_lists;
     }
 
+    /*
+         ************************ performAggregate ************************
+         * STILL NEED TO FIGURE OUT
+         *
+         *
+         * ******* Running Time: ?
+     */
+
     private static ArrayList<String[]> performAggregate(String[][] input_array, String agg_func, String[] cols_needed) {
         // **** Split by group columns, output split_array(s) ****
 
-        // Turn input_array into a sorted list
-//        ArrayList<String[]> sorted_list = sortToList(input_array);
-
-        ArrayList<String[]> sorted_list = new ArrayList<>();
+        ArrayList<String[]> list = new ArrayList<>();
         for (String[] row : input_array) {
-            Collections.addAll(sorted_list, row);
+            Collections.addAll(list, row);
         }
 
         // create list of arrays of keys
@@ -268,7 +304,7 @@ public class Aggregate {
         }
 
         ArrayList<ArrayList<String[]>> big_list = new ArrayList<>();
-        big_list.add(sorted_list);
+        big_list.add(list);
 
         for (int i = 0; i < key_list.size(); i++) {
             big_list = performSplit(i, big_list, key_list.get(i));
@@ -373,6 +409,8 @@ public class Aggregate {
         }
         String final_col = agg_function + "(" + agg_column + ")";
         cols_needed[cols_needed.length - 1] = agg_column;
+
+
 
         String[][] trimmed_array = selectColumns(full_data_array, column_names, cols_needed);
 
