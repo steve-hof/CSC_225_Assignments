@@ -19,13 +19,18 @@ import java.util.ArrayList;
 
 
 public class Aggregate {
-
+    /* Converts string element to float */
     private static float convertNumeric(String element) {
         float float_element = Float.valueOf(element);
         return float_element;
 
     }
+    /* Prints aggregated csv file to standard out
+        input:  String array with appropriate column headings
+                ArrayList with each row of the csv as an array
 
+
+     */
     private static void writeToConsole(ArrayList<String[]> csv_list, String[] header) {
         for (String aHeader : header) {
             System.out.print(aHeader);
@@ -48,6 +53,15 @@ public class Aggregate {
         System.err.printf("Where <function> is one of \"count\", \"count_distinct\", \"sum\", \"avg\"\n");
     }
 
+    /*
+        selectColumns takes an array representing the entire csv file and copies
+        the necessary columns into a new 2d array.
+
+        Although there is a 3 level nested loop, only the last for loop is a function
+        of the number of rows of the csv, so this runs in O(n) time
+
+        *** O(n) ***
+     */
     private static String[][] selectColumns(String[][] array, String[] col_names, String[] keep_cols) {
 
         int num_rows = array.length;
@@ -67,6 +81,12 @@ public class Aggregate {
         return pruned_array;
     }
 
+    /*
+        Takes in an array of size n representing the all of the rows of a
+        column.
+
+        ******* NEED TO FIGURE OUT AND PROBABLY TWEAK TO IMPROVE RUNNING TIME *******
+     */
     private static String[] filterDuplicates(String[] duplicates_array) {
         int count = duplicates_array.length;
 
@@ -79,11 +99,18 @@ public class Aggregate {
                 }
             }
         }
+        // Look up running time for this
         String[] filtered_array = Arrays.copyOf(duplicates_array, count);
 
         return filtered_array;
     }
+    /*
+        performSum adds up the array of floats it is passed. Although
+        it is only called once the columns are aggregated, in the worst
+        case it is still O(n)
 
+        *** O(n) ***
+     */
     private static float performSum(float[] agg_array) {
         float agg_result = 0;
         for (int i = 0; i < agg_array.length; i++) {
@@ -92,6 +119,9 @@ public class Aggregate {
         return agg_result;
     }
 
+    /*
+        *** O(n) ***
+     */
     private static float performCount(float[] agg_array) {
         float agg_result = 0;
         for (int i = 0; i < agg_array.length; i++) {
@@ -100,6 +130,9 @@ public class Aggregate {
         return agg_result;
     }
 
+    /*
+        *** O(n) ***
+     */
     private static float performAvg(float[] agg_array) {
         float agg_result;
         float sum = performSum(agg_array);
@@ -108,6 +141,10 @@ public class Aggregate {
         return agg_result;
     }
 
+    /*
+        ******* LOOK INTO .SORT *******
+        * probably O(nlogn) because loop is only O(n)
+     */
     private static float performDistinct(ArrayList<String> total_list) {
         Collections.sort(total_list);
         float count = 1;
@@ -120,6 +157,14 @@ public class Aggregate {
         return count;
     }
 
+    /*
+        Takes in the column that the aggregate function is being applied to,
+        converts the elements to floats if necessary and passes it on to the
+        appropriate function.
+
+        *** O(n) ***
+
+     */
     private static String applyFunc(ArrayList<String> data_column, String func) {
         int num_rows = data_column.size();
         float agg_result = 0;
@@ -149,11 +194,11 @@ public class Aggregate {
 
     private static ArrayList<String[]> sortToList(String[][] data_array) {
 
-        Arrays.sort(data_array, (entry1, entry2) -> {
-            final String key_1 = entry1[0];
-            final String key_2 = entry2[0];
-            return key_1.compareTo(key_2);
-        });
+//        Arrays.sort(data_array, (entry1, entry2) -> {
+//            final String key_1 = entry1[0];
+//            final String key_2 = entry2[0];
+//            return key_1.compareTo(key_2);
+//        });
 
 
         ArrayList<String[]> sortedList = new ArrayList<>();
