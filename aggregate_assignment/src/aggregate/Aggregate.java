@@ -82,11 +82,15 @@ public class Aggregate {
     }
 
     /*
-        Takes in an array of size n representing the all of the rows of a
-        column.
+     ************************ filter_duplicates ************************
+     *
+     *
+     * Arrays.copyOf runs in O(n)
+     *
 
-        ******* NEED TO FIGURE OUT AND PROBABLY TWEAK TO IMPROVE RUNNING TIME *******
      */
+
+
     private static String[] filterDuplicates(String[] duplicates_array) {
         int count = duplicates_array.length;
 
@@ -99,18 +103,20 @@ public class Aggregate {
                 }
             }
         }
-        // Look up running time for this
+
         String[] filtered_array = Arrays.copyOf(duplicates_array, count);
 
         return filtered_array;
     }
-    /*
-        performSum adds up the array of floats it is passed. Although
-        it is only called once the columns are aggregated, in the worst
-        case it is still O(n)
 
-        *** O(n) ***
+    /*
+     ************************ perform____ (func) ************************
+     * All of performSum, performCount, performAvg are a single for loop
+     * that depends on n.
+     *
+     * *********** Running Time: O(n) (for all three methods)
      */
+
     private static float performSum(float[] agg_array) {
         float agg_result = 0;
         for (int i = 0; i < agg_array.length; i++) {
@@ -119,9 +125,7 @@ public class Aggregate {
         return agg_result;
     }
 
-    /*
-        *** O(n) ***
-     */
+
     private static float performCount(float[] agg_array) {
         float agg_result = 0;
         for (int i = 0; i < agg_array.length; i++) {
@@ -130,9 +134,7 @@ public class Aggregate {
         return agg_result;
     }
 
-    /*
-        *** O(n) ***
-     */
+
     private static float performAvg(float[] agg_array) {
         float agg_result;
         float sum = performSum(agg_array);
@@ -141,10 +143,19 @@ public class Aggregate {
         return agg_result;
     }
 
+
     /*
-        ******* LOOK INTO .SORT *******
-        * probably O(nlogn) because loop is only O(n)
+     ************************ performDistinct ************************
+     * documentation: https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html
+     *
+     * According to documentation above, Collections.sort uses a modified merge sort and
+     * its running time is O(nlogn)
+     *
+     * The for loop runs in O(n)
+     *
+     * ********* Running Time: O(nlogn)
      */
+
     private static float performDistinct(ArrayList<String> total_list) {
         Collections.sort(total_list);
         float count = 1;
@@ -157,14 +168,14 @@ public class Aggregate {
         return count;
     }
 
-    /*
-        Takes in the column that the aggregate function is being applied to,
-        converts the elements to floats if necessary and passes it on to the
-        appropriate function.
+    /*  ************************ applyFunc ************************
+        * Takes in the column that the aggregate function is being applied to,
+        * converts the elements to floats if necessary and passes it on to the
+        * appropriate function.
 
         *** O(n) ***
 
-     */
+    */
     private static String applyFunc(ArrayList<String> data_column, String func) {
         int num_rows = data_column.size();
         float agg_result = 0;
@@ -192,24 +203,28 @@ public class Aggregate {
     }
 
 
-    private static ArrayList<String[]> sortToList(String[][] data_array) {
-
+//    private static ArrayList<String[]> sortToList(String[][] data_array) {
+//
 //        Arrays.sort(data_array, (entry1, entry2) -> {
 //            final String key_1 = entry1[0];
 //            final String key_2 = entry2[0];
 //            return key_1.compareTo(key_2);
 //        });
+//
+//
+//        ArrayList<String[]> sortedList = new ArrayList<>();
+//        for (String[] row : data_array) {
+//            Collections.addAll(sortedList, row);
+//        }
+//
+//        return sortedList;
+//    }
 
-
-        ArrayList<String[]> sortedList = new ArrayList<>();
-        for (String[] row : data_array) {
-            Collections.addAll(sortedList, row);
-        }
-
-        return sortedList;
-    }
-
-
+    /*
+        ************************ performSplit ************************
+        *
+        *
+     */
     private static ArrayList<ArrayList<String[]>> performSplit(int sort_column, ArrayList<ArrayList<String[]>> data, String[] keys) {
         ArrayList<ArrayList<String[]>> smaller_lists = new ArrayList<>();
 
@@ -232,7 +247,12 @@ public class Aggregate {
         // **** Split by group columns, output split_array(s) ****
 
         // Turn input_array into a sorted list
-        ArrayList<String[]> sorted_list = sortToList(input_array);
+//        ArrayList<String[]> sorted_list = sortToList(input_array);
+
+        ArrayList<String[]> sorted_list = new ArrayList<>();
+        for (String[] row : input_array) {
+            Collections.addAll(sorted_list, row);
+        }
 
         // create list of arrays of keys
         ArrayList<String[]> key_list = new ArrayList<>();
@@ -355,8 +375,11 @@ public class Aggregate {
         cols_needed[cols_needed.length - 1] = agg_column;
 
         String[][] trimmed_array = selectColumns(full_data_array, column_names, cols_needed);
+
         ArrayList<String[]> finished_list = performAggregate(trimmed_array, agg_function, cols_needed);
+
         cols_needed[cols_needed.length - 1] = final_col;
+
         writeToConsole(finished_list, cols_needed);
 
         int fill = 12;
