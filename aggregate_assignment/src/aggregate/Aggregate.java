@@ -5,20 +5,26 @@ package aggregate;
 
    Some starter code for programming assignment 1, showing
    the command line argument parsing and the basics of opening
-   and reading lines from the CSV file.
-
-   B. Bird - 04/30/2018
+   and reading lines from the CSV file was written by B. Bird.
 
    Rest of it was completed by Steve Hof V00320492
 */
 
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.ArrayList;
 
 
 public class Aggregate {
+
+    // isNumeric was taken from:
+    // https://stackoverflow.com/questions/1102891/how-to-check-if-a-string-is-numeric-in-java
+    public static boolean isNumeric(String str)
+    {
+        return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+    }
 
     /* Running Time: O(1) */
     private static float convertNumeric(String element) {
@@ -216,7 +222,12 @@ public class Aggregate {
         }
 
         for (int i = 0; i < num_rows; i++) {
-            agg_array[i] = convertNumeric(data_column.get(i));
+            if (isNumeric(data_column.get(i))) {
+                agg_array[i] = convertNumeric(data_column.get(i));
+            } else {
+                throw new NumberFormatException("ERROR: The aggregation column contains non numeric values");
+            }
+
         }
         if (func.equals("sum")) {
             agg_result = performSum(agg_array);
@@ -242,9 +253,9 @@ public class Aggregate {
         for (ArrayList<String[]> sublist : data) {
             for (String key : keys) {
                 ArrayList<String[]> templist = new ArrayList<>();
-                for (int i = 0; i < sublist.size(); i++) {
-                    if (sublist.get(i)[sort_column].equals(key)) {
-                        templist.add(sublist.get(i));
+                for (String[] aSublist : sublist) {
+                    if (aSublist[sort_column].equals(key)) {
+                        templist.add(aSublist);
                     }
                 }
                 smaller_lists.add(templist);
@@ -334,8 +345,12 @@ public class Aggregate {
 
         if (!agg_function.equals("count") && !agg_function.equals("count_distinct")
                 && !agg_function.equals("sum") && !agg_function.equals("avg")) {
-            System.out.println("Looking for file");
+            System.err.printf("That is not a valid aggregate function.");
             showUsage();
+            return;
+        }
+        if (Arrays.asList(group_columns).contains(agg_column)) {
+            System.err.printf("the aggregation column cannot be the same as any other requested column\n");
             return;
         }
 
@@ -394,7 +409,17 @@ public class Aggregate {
         String final_col = agg_function + "(" + agg_column + ")";
         cols_needed[cols_needed.length - 1] = agg_column;
 
+        ArrayList<String> requested_columns = new ArrayList<>(Arrays.asList(group_columns));
+        ArrayList<String> actual_columns = new ArrayList<>(Arrays.asList(column_names));
 
+        requested_columns.add(agg_column);
+
+        for (String col : requested_columns) {
+            if (!actual_columns.contains(col)) {
+                System.err.printf("You have requested an invalid column\n");
+                return;
+            }
+        }
 
         String[][] trimmed_array = selectColumns(full_data_array, column_names, cols_needed);
 
@@ -403,9 +428,7 @@ public class Aggregate {
         cols_needed[cols_needed.length - 1] = final_col;
 
         writeToConsole(finished_list, cols_needed);
-
-        int DEBUG = 2;
-    }
+        }
 
 }
 
